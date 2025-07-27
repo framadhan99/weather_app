@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:weather_app/core/helpers/ui_helper.dart';
 import 'package:weather_app/core/utils/utils.dart';
 import 'package:weather_app/presentation/pages/home/home_page.dart';
+import 'package:weather_app/presentation/pages/weather_daily/weather_daily_page.dart.dart';
 
 class CustomTabWeatherPage extends StatefulWidget {
   const CustomTabWeatherPage({super.key});
@@ -24,10 +25,6 @@ class _CustomTabWeatherPageState extends State<CustomTabWeatherPage> {
       duration: const Duration(milliseconds: 300),
       curve: Curves.ease,
     );
-  }
-
-  void _onNext7DaysTapped() {
-    nextScreen(HomePage());
   }
 
   @override
@@ -85,7 +82,7 @@ class _CustomTabWeatherPageState extends State<CustomTabWeatherPage> {
                     }),
                     const Spacer(),
                     GestureDetector(
-                      onTap: _onNext7DaysTapped,
+                      onTap: () => nextScreen(WeatherDailyPage()),
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 8),
                         child: Row(
