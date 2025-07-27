@@ -47,7 +47,7 @@ class CardWeatherDaily extends StatelessWidget {
           horizontalSpace(8),
           Padding(
             padding: const EdgeInsets.only(top: 8),
-            child: SvgPicture.asset(icon),
+            child: Image.network(icon),
           ),
         ],
       ),

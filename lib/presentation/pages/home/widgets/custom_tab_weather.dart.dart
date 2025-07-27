@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_app/core/helpers/helpers.dart';
 import 'package:weather_app/core/helpers/ui_helper.dart';
 import 'package:weather_app/core/utils/utils.dart';
-import 'package:weather_app/presentation/pages/home/home_page.dart';
+import 'package:weather_app/data/weather/provider/weather/weather_provider.dart';
 import 'package:weather_app/presentation/pages/weather_daily/weather_daily_page.dart.dart';
 
 class CustomTabWeatherPage extends StatefulWidget {
@@ -16,7 +18,7 @@ class _CustomTabWeatherPageState extends State<CustomTabWeatherPage> {
   int selectedIndex = 0;
   final PageController _pageController = PageController();
 
-  final List<String> tabs = ['Today', 'Tomorrow'];
+  final List<String> tabs = ['Today'];
 
   void _onTabSelected(int index) {
     setState(() => selectedIndex = index);
@@ -29,6 +31,10 @@ class _CustomTabWeatherPageState extends State<CustomTabWeatherPage> {
 
   @override
   Widget build(BuildContext context) {
+    final prov = context.watch<WeatherProvider>();
+    final isLoading = prov.isLoading;
+    final weatherHourly = prov.weather?.hourly;
+    final weatherTomorrow = prov.weather?.daily?[1];
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -93,7 +99,7 @@ class _CustomTabWeatherPageState extends State<CustomTabWeatherPage> {
                               style: AssetStyles.description.copyWith(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12,
-                                color: AssetColors.textColor.withAlpha(100),
+                                color: AssetColors.textColor,
                               ),
                             ),
                             horizontalSpace(8),
@@ -118,8 +124,10 @@ class _CustomTabWeatherPageState extends State<CustomTabWeatherPage> {
                 controller: _pageController,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
+                  // Tab Today
                   ListView.builder(
                     scrollDirection: Axis.horizontal,
+                    itemCount: weatherHourly?.length ?? 1,
                     itemBuilder: (context, indext) {
                       return Padding(
                         padding: const EdgeInsets.only(right: 16),
@@ -128,6 +136,7 @@ class _CustomTabWeatherPageState extends State<CustomTabWeatherPage> {
                             horizontal: 8,
                             // vertical: 6,
                           ),
+                          height: 50,
                           decoration: BoxDecoration(
                             color: Colors.white.withAlpha(75),
                             border: Border.all(
@@ -140,19 +149,27 @@ class _CustomTabWeatherPageState extends State<CustomTabWeatherPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Now",
+                                "${weatherHourly?[indext].minute}",
                                 style: AssetStyles.description.copyWith(
                                   fontSize: 10,
                                 ),
                               ),
-
-                              SvgPicture.asset(
-                                // fit: BoxFit.cover,
-                                AssetPaths.iconCloudy,
-                                // width: 26,
-                              ),
+                              weatherHourly?[indext].weather[0].icon != null
+                                  ? Image.network(
+                                      iconUrl(
+                                        "${weatherHourly?[indext].weather[0].icon}",
+                                      ),
+                                      fit: BoxFit.contain,
+                                      width: 32,
+                                      height: 32,
+                                    )
+                                  : SvgPicture.asset(
+                                      // fit: BoxFit.cover,
+                                      AssetPaths.iconCloudy,
+                                      // width: 26,
+                                    ),
                               Text(
-                                "19°",
+                                "${weatherHourly?[indext].temp.toString().split(".").first}°",
                                 style: AssetStyles.description.copyWith(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
@@ -164,7 +181,63 @@ class _CustomTabWeatherPageState extends State<CustomTabWeatherPage> {
                       );
                     },
                   ),
-                  Center(child: Text("Tomorrow's Forecast")),
+                  // Tab Tomorrow
+                  // ListView.builder(
+                  //   scrollDirection: Axis.horizontal,
+                  //   itemCount: weatherTomorrow?.weather.length ?? 1,
+                  //   itemBuilder: (context, indext) {
+                  //     return Padding(
+                  //       padding: const EdgeInsets.only(right: 16),
+                  //       child: Container(
+                  //         padding: EdgeInsets.symmetric(
+                  //           horizontal: 8,
+                  //           // vertical: 6,
+                  //         ),
+                  //         height: 50,
+                  //         decoration: BoxDecoration(
+                  //           color: Colors.white.withAlpha(75),
+                  //           border: Border.all(
+                  //             color: Colors.white.withAlpha(80),
+                  //             width: 0.5,
+                  //           ),
+                  //           borderRadius: BorderRadius.circular(20),
+                  //         ),
+                  //         child: Column(
+                  //           mainAxisAlignment: MainAxisAlignment.center,
+                  //           children: [
+                  //             Text(
+                  //               "${weatherTomorrow?.hourly[indext].dt}",
+                  //               style: AssetStyles.description.copyWith(
+                  //                 fontSize: 10,
+                  //               ),
+                  //             ),
+                  //             weatherHourly?[indext].weather[0].icon != null
+                  //                 ? Image.network(
+                  //                     iconUrl(
+                  //                       "${weatherHourly?[indext].weather[0].icon}",
+                  //                     ),
+                  //                     fit: BoxFit.contain,
+                  //                     width: 32,
+                  //                     height: 32,
+                  //                   )
+                  //                 : SvgPicture.asset(
+                  //                     // fit: BoxFit.cover,
+                  //                     AssetPaths.iconCloudy,
+                  //                     // width: 26,
+                  //                   ),
+                  //             Text(
+                  //               "${weatherHourly?[indext].temp}°",
+                  //               style: AssetStyles.description.copyWith(
+                  //                 fontSize: 12,
+                  //                 fontWeight: FontWeight.bold,
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
                 ],
               ),
             ),

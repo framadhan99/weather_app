@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/helpers/location_helper.dart';
-import '../models/weather_response.dart';
-import '../repositories/weather_repository.dart';
+import '../../models/weather_response.dart';
+import '../../repositories/weather_repository.dart';
 
 class WeatherProvider extends ChangeNotifier {
   WeatherProvider() {

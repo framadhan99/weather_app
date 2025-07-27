@@ -28,6 +28,12 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        buildConfigField("String", "API_KEY", "\"a343efc31bfbef0909aa438da3fb42f0\"")
+
+    }
+    
+     buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {

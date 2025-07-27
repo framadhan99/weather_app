@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/core/utils/navigation_services.dart';
-import 'package:weather_app/data/weather/provider/weather_provider.dart';
+import 'package:weather_app/data/weather/provider/app/app_start_provider.dart';
+import 'package:weather_app/data/weather/provider/weather/weather_provider.dart';
 import 'package:weather_app/presentation/pages/app_theme.dart';
 import 'package:weather_app/presentation/pages/home/widgets/custom_tab_weather.dart.dart';
 import 'package:weather_app/presentation/pages/login/login_page.dart';
@@ -16,7 +17,10 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => WeatherProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => WeatherProvider()),
+        ChangeNotifierProvider(create: (_) => AppStartProvider()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
