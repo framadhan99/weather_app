@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart' show Provider;
-import 'package:weather_app/core/helpers/ui_helper.dart';
-import 'package:weather_app/core/utils/utils.dart';
-import 'package:weather_app/presentation/pages/home/home_page.dart';
-import 'package:weather_app/presentation/pages/login/login_page.dart';
+import 'package:provider/provider.dart';
 
 import '../../../data/weather/provider/app/app_start_provider.dart';
+import '../../widgets/icon/icon_widget.dart';
+import '../home/home_page.dart';
+import '../login/login_page.dart';
+
+/// SplashPage is the initial screen shown when the app starts.
+/// It initializes the application by calling [AppStartProvider.initializeApp],
+/// then navigates to either [HomePage] or [LoginPage] based on the login status.
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -22,6 +24,9 @@ class _SplashPageState extends State<SplashPage> {
     navigateFromSplash();
   }
 
+  /// This function initializes the app and navigates to the appropriate page.
+  /// If the user is already logged in, it navigates to [HomePage].
+  /// Otherwise, it navigates to [LoginPage].
   Future<void> navigateFromSplash() async {
     final appStartProvider = Provider.of<AppStartProvider>(
       context,
@@ -46,38 +51,7 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white.withAlpha(60),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: Colors.white.withAlpha(80),
-                  width: 0.5,
-                ),
-              ),
-              child: SvgPicture.asset(
-                AssetPaths.iconCloudy,
-                width: 150,
-                height: 200,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 6),
-              child: Text(
-                "Weather App",
-                style: AssetStyles.heading.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    // Display a centered logo or app icon during loading
+    return Scaffold(body: Center(child: IconWidget()));
   }
 }

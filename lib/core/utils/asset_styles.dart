@@ -5,16 +5,16 @@ class AssetStyles {
   static const TextStyle numberCelcius = TextStyle(
     fontSize: 43,
     fontWeight: FontWeight.bold,
-    color: AssetColors.textColor,
+    color: AssetColors.colorPrimary,
   );
   static const TextStyle heading = TextStyle(
     fontSize: 32,
     fontWeight: FontWeight.w500,
-    color: AssetColors.textColor,
+    color: AssetColors.colorPrimary,
   );
 
   static const TextStyle description = TextStyle(
     fontSize: 14,
-    color: AssetColors.textColor,
+    color: AssetColors.colorPrimary,
   );
 }

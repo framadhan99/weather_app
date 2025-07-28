@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/helpers/ui_helper.dart';
 import '../../../../core/utils/utils.dart';

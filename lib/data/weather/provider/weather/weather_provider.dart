@@ -13,13 +13,18 @@ class WeatherProvider extends ChangeNotifier {
   WeatherResponse? weather;
   bool isLoading = false;
   String? errorMessage;
+  String? getCity;
 
   Future<void> init() async {
     try {
       isLoading = true;
-      notifyListeners();
 
       final position = await LocationHelper.determinePosition();
+      getCity = await LocationHelper.getCityName(
+        position.latitude,
+        position.longitude,
+      );
+      notifyListeners();
       await getWeather(lat: position.latitude, lon: position.longitude);
     } catch (e) {
       errorMessage = 'Gagal mendapatkan lokasi: $e';

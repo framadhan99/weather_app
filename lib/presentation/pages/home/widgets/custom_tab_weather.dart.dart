@@ -32,9 +32,7 @@ class _CustomTabWeatherPageState extends State<CustomTabWeatherPage> {
   @override
   Widget build(BuildContext context) {
     final prov = context.watch<WeatherProvider>();
-    final isLoading = prov.isLoading;
     final weatherHourly = prov.weather?.hourly;
-    final weatherTomorrow = prov.weather?.daily?[1];
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -46,7 +44,7 @@ class _CustomTabWeatherPageState extends State<CustomTabWeatherPage> {
                 Container(
                   margin: EdgeInsets.only(bottom: 1),
                   height: 1,
-                  color: AssetColors.textColor.withAlpha(40),
+                  color: AssetColors.colorPrimary.withAlpha(40),
                 ),
                 Row(
                   children: [
@@ -66,8 +64,8 @@ class _CustomTabWeatherPageState extends State<CustomTabWeatherPage> {
                                       : FontWeight.w500,
                                   fontSize: 12,
                                   color: isSelected
-                                      ? AssetColors.textColor
-                                      : AssetColors.textColor.withAlpha(100),
+                                      ? AssetColors.colorPrimary
+                                      : AssetColors.colorPrimary.withAlpha(100),
                                 ),
                               ),
                               verticalSpace(10),
@@ -78,7 +76,7 @@ class _CustomTabWeatherPageState extends State<CustomTabWeatherPage> {
                                   height: 4,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: AssetColors.textColor,
+                                    color: AssetColors.colorPrimary,
                                   ),
                                 ),
                             ],
@@ -99,14 +97,14 @@ class _CustomTabWeatherPageState extends State<CustomTabWeatherPage> {
                               style: AssetStyles.description.copyWith(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12,
-                                color: AssetColors.textColor,
+                                color: AssetColors.colorPrimary,
                               ),
                             ),
                             horizontalSpace(8),
                             const Icon(
                               Icons.arrow_forward_ios,
                               size: 10,
-                              color: AssetColors.textColor,
+                              color: AssetColors.colorPrimary,
                             ),
                           ],
                         ),

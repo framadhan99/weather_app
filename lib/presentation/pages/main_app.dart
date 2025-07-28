@@ -4,12 +4,8 @@ import 'package:weather_app/core/utils/navigation_services.dart';
 import 'package:weather_app/data/weather/provider/app/app_start_provider.dart';
 import 'package:weather_app/data/weather/provider/weather/weather_provider.dart';
 import 'package:weather_app/presentation/pages/app_theme.dart';
-import 'package:weather_app/presentation/pages/home/widgets/custom_tab_weather.dart.dart';
 import 'package:weather_app/presentation/pages/login/login_page.dart';
 import 'package:weather_app/presentation/pages/splash/splash_page.dart';
-import 'package:weather_app/presentation/pages/weather_daily/weather_daily_page.dart.dart';
-
-import 'home/home_page.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -24,6 +20,7 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
+
         navigatorKey: navigatorKey,
         home: const SplashPage(),
         builder: (context, child) {

@@ -1,5 +1,4 @@
 import 'package:intl/intl.dart';
-import 'package:weather_app/data/weather/models/hourly_weather.dart';
 import 'package:weather_app/data/weather/models/weather.dart';
 
 class DailyWeather {

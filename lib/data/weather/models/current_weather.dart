@@ -28,7 +28,7 @@ class CurrentWeather {
   // Getter from name day
   String get dayName {
     final date = DateTime.fromMillisecondsSinceEpoch(dt * 1000);
-    return DateFormat('EE, d MMMM').format(date);
+    return DateFormat('EE, d MMMM, HH:mm').format(date);
   }
 
   factory CurrentWeather.fromJson(Map<String, dynamic> json) {

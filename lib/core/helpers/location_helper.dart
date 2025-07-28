@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationHelper {
@@ -26,7 +29,26 @@ class LocationHelper {
 
     // Get Current Location
     return await Geolocator.getCurrentPosition(
-      locationSettings: const LocationSettings(accuracy: LocationAccuracy.high),
+      locationSettings: const LocationSettings(accuracy: LocationAccuracy.best),
     );
+  }
+
+  static Future<String?> getCityName(double latitude, double longitude) async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        latitude,
+        longitude,
+      );
+
+      if (placemarks.isNotEmpty) {
+        final Placemark placemark = placemarks.first;
+        return placemark.subAdministrativeArea ?? placemark.country;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      log("Failed to get city name: $e");
+      return null;
+    }
   }
 }

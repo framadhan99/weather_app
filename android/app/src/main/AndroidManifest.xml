@@ -5,7 +5,7 @@
      <!-- addtional permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:label="weather_app"
+        android:label="Weather App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

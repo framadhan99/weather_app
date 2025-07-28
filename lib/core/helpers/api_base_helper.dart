@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:weather_app/core/utils/strings.dart';
 
@@ -21,11 +19,7 @@ class ApiBaseHelper {
         baseUrl: customUrl ?? Strings.baseUrl,
         connectTimeout: const Duration(milliseconds: 30000),
         receiveTimeout: const Duration(milliseconds: 30000),
-        headers: {
-          "Content-Type": contentType,
-          "Accept": "application/json",
-          // 'authorization': 'Bearer ${LocalDB.user.jwt ?? ""}',
-        },
+        headers: {"Content-Type": contentType, "Accept": "application/json"},
       ),
     );
     dio.interceptors.add(
